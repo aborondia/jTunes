@@ -128,15 +128,16 @@ namespace jTunes.Models
       return rating;
     }
 
-    public static Dictionary<Song, double> GetTopThreeRatedSongs()
+    public static Dictionary<KeyValuePair<Song, int>, double> GetTopThreeRatedSongs()
     {
+      int chartNumber = 1;
       var songsWithRatings = db.UserSongs
         .GroupBy(us => us.Song.Id)
         .OrderByDescending(us => us.Average(s => s.Rating));
       var topThreeSongsWithSales = songsWithRatings
         .Take(3)
         .ToDictionary(
-        swr => db.Songs.First(s => s.Id == swr.Key),
+        swr => new KeyValuePair<Song, int>(db.Songs.First(s => s.Id == swr.Key), chartNumber++),
         swr => Math.Round((double)swr.Average(sr => sr.Rating), 2)
         );
 

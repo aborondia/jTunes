@@ -16,7 +16,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        @Html.ActionLink("jTunes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
@@ -34,8 +34,8 @@
           @*<li>@Html.ActionLink("Top 3 Rated Songs", "TopThreeSongsByRating", "Songs")</li>*@
           @*<li>@Html.ActionLink("Purchase a Song", "ChoosePurchaser", "Songs")</li>*@
           @*<li>@Html.ActionLink("Refund", "ChooseRefundee", "Songs")</li>*@
-          <li>@Html.ActionLink("Artists Song Sales", "ArtistSongSales", "Artists")</li> @*GET*@
-          <li>@Html.ActionLink("Monthly Sales", "MonthlySales", "UserSongs")</li>
+          @*<li>@Html.ActionLink("Artists Song Sales", "ArtistSongSales", "Artists")</li>*@
+          @*<li>@Html.ActionLink("Monthly Sales", "MonthlySales", "UserSongs")</li>*@
         </ul>
       </div>
     </div>
@@ -44,7 +44,7 @@
     @RenderBody()
     <hr />
     <footer>
-      <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+      <p>&copy; @DateTime.Now.Year - jTunes</p>
     </footer>
   </div>
 

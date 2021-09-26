@@ -1,12 +1,14 @@
-﻿@model Dictionary<Song, double>
-
+﻿@model Dictionary<KeyValuePair<Song, int>, double>
 <h2>Top Three Rated Songs</h2>
 
 <div>
-  <ol>
+  <ul class="list-unstyled">
     @foreach (var songWithRating in Model)
     {
-      <li>@songWithRating.Key.Name total average rating: @songWithRating.Value</li>
+      <li class="h2"><u>#@songWithRating.Key.Value</u></li>
+      <li class="h3"><b><span class="glyphicon glyphicon-music"></span></b> Title: <b><i>@songWithRating.Key.Key.Name</i></b></li>
+      <li class="h3"><span class="glyphicon glyphicon-user"></span> Artist: <b><i>@songWithRating.Key.Key.Artist.Name</i></b></li>
+      <li class="h3">Total Average Rating: <b><i>@songWithRating.Value</i></b></li>
     }
-  </ol>
+  </ul>
 </div>

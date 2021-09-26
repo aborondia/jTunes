@@ -15,15 +15,15 @@
 {
   <div>
     <ul class="list-unstyled">
-      <li class="h3"><span class="glyphicon glyphicon-music"></span> Sales for: @ViewBag.SongName</li>
-      <li class="h3">Total: @ViewBag.TotalPurchases</li>
-        <li class="h3">Purchase Details:</li>
+      <li class="h3"><span class="glyphicon glyphicon-music"> </span> Title: <b><i>@ViewBag.SongName</i></b></li>
+      <li class="h3">Total Purchases:  <b><i>@ViewBag.TotalPurchases</i></b></li>
+      <li class="h3"><u>Purchase Details</u></li>
       @foreach (var userSong in Model)
       {
         <li>
           <ul class="list-unstyled">
-            <li><span class="glyphicon glyphicon-user"> </span> User: @userSong.User.Name</li>
-            <li><span class="glyphicon glyphicon-time"> </span> Purchased: @userSong.PurchaseDate.ToShortDateString()</li>
+            <li><span class="glyphicon glyphicon-user"> </span> User: <b><i>@userSong.User.Name</i></b></li>
+            <li><span class="glyphicon glyphicon-time"> </span> Purchased: <b><i>@userSong.PurchaseDate.ToShortDateString()</i></b></li>
           </ul>
           <br />
         </li>

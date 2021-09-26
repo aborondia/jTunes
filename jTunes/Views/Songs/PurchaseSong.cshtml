@@ -18,5 +18,9 @@
         <li>@Html.ActionLink("Buy this song", "PurchaseSong", new { User = ViewBag.UserPurchasing.Id, Song = song.Id })</li>
       </ul>
     }
+    if(Model.Count() <= 0)
+        {
+          <h3>There are no available songs for this user to purchase.</h3>
+        }
   }
 </div>

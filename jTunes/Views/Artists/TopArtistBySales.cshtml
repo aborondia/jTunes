@@ -2,17 +2,15 @@
 
 <h2>Top Selling Artist</h2>
 
-<h2>@ViewBag.ArtistName</h2>
+<h2><span class="glyphicon glyphicon-user"> </span> Artist: <i><b>@ViewBag.ArtistName</b></i> - Total Sales: <b>@ViewBag.TotalSales</b></h2>
 
-<h2>Total Sales: @ViewBag.TotalSales</h2>
 
-<h2>Individual Song Sales:</h2>
+<h2><u>Individual Song Sales</u></h2>
 <div>
-  <ul>
-
+  <ul class="list-unstyled">
     @foreach (var songWithSales in Model)
     {
-      <li>@songWithSales.Key total sales: @songWithSales.Value</li>
+      <li class="h4"><span class="glyphicon glyphicon-music"> </span> Title: @songWithSales.Key - Total Sales: <b>@songWithSales.Value</b></li>
     }
   </ul>
 </div>

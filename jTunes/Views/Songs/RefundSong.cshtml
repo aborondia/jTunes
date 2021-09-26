@@ -14,8 +14,14 @@
         <li>Title: @userSong.Song.Name</li>
         <li>Artist: @userSong.Song.Artist.Name</li>
         <li>Price: @userSong.Song.Price.ToString("c2")</li>
+        <li>Purchase Date: @userSong.PurchaseDate.ToShortDateString()</li>
+        <li>Purchase Time: @userSong.PurchaseDate.ToShortTimeString()</li>
         <li>@Html.ActionLink("Refund song", "RefundSong", new { User = ViewBag.UserRequestingRefund.Id, Song = userSong.SongId })</li>
       </ul>
+    }
+    if (Model.Count() <= 0)
+    {
+      <h3>This user has not purchased any songs.</h3>
     }
   }
 </div>

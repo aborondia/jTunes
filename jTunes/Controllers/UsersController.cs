@@ -78,6 +78,18 @@ namespace jTunes.Controllers
           return RedirectToAction("Index", new { Message = $"Could not create user. The user name {user.Name} is already taken.", MessageStyle = "text-danger" });
         }
 
+        if (user.Money != null)
+        {
+          if (user.Money < 0)
+          {
+            user.Money = 0;
+          }
+          else
+          {
+            user.Money = Math.Round((double)user.Money, 2);
+          }
+        }
+
         db.Users.Add(user);
         db.SaveChanges();
         return RedirectToAction("Index", new { Message = $"User {user.Name} successfully added to the database.", MessageStyle = "text-success" });
@@ -110,6 +122,20 @@ namespace jTunes.Controllers
     {
       if (ModelState.IsValid)
       {
+        if (user.Money != null)
+        {
+          if (user.Money < 0)
+          {
+            user.Money = 0;
+          }
+          else
+          {
+            user.Money = Math.Round((double)user.Money, 2);
+          }
+        }
+
+
+
         db.Entry(user).State = EntityState.Modified;
         db.SaveChanges();
         return RedirectToAction("Index");

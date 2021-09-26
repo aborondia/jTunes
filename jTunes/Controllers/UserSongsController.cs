@@ -42,7 +42,7 @@ namespace jTunes.Controllers
 
       if (salesWithingTimeFrame.Count() > 0)
       {
-        ViewBag.TotalSales = salesWithingTimeFrame.Sum(us => us.Song.Price).ToString("c2");
+        ViewBag.TotalSales = $"Total Sales: {salesWithingTimeFrame.Sum(us => us.Song.Price).ToString("c2")}";
       }
       else
       {

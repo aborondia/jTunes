@@ -1,31 +1,31 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+  ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+  <h1>jTunes <span class="glyphicon glyphicon-music"></span></h1>
+  <p class="lead">Welcome to jTunes!</p>
+  <p>Please select an option below to get started.</p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+<div class="row flex">
+  <div class="col-md-4">
+    <h2>Users Options</h2>
+    <ul class="list-unstyled">
+      <li class="h4">@Html.ActionLink("Purchase a Song", "ChoosePurchaser", "Songs")</li>
+      <li class="h4">@Html.ActionLink("Request a Refund", "ChooseRefundee", "Songs")</li>
+      <li class="h4">@Html.ActionLink("View Purchased Songs", "PurchasedSongs", "Users")</li>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <h2>Statistics</h2>
+    <ul class="list-unstyled">
+      <li class="h4">@Html.ActionLink("All Artist Song Sales", "ArtistSongSales", "Artists")</li>
+      <li class="h4">@Html.ActionLink("Individual Song Sales", "SongPurchaseCount", "Songs")</li>
+      <li class="h4">@Html.ActionLink("Sales by Month", "MonthlySales", "UserSongs")</li>
+      <li class="h4">@Html.ActionLink("Top 3 Rated Songs", "TopThreeSongsByRating", "Songs")</li>
+      <li class="h4">@Html.ActionLink("Top Artist by Sales", "TopArtistBySales", "Artists")</li>
+      <li class="h4">@Html.ActionLink("Top Song by Sales", "TopSongBySales", "Songs")</li>
+    </ul>
+  </div>
 </div>

@@ -1,18 +1,19 @@
 ﻿@model Dictionary<string, IEnumerable<IGrouping<int, Song>>>
 
-<h2>Artists Song Sales</h2>
+<h2><u>Artists Song Sales</u></h2>
 <div>
   @foreach (var artistEntry in Model)
   {
-    <h3>Songs by @artistEntry.Key:</h3>
-    <ul>
+    <h3><span class="glyphicon glyphicon-user"></span> Artist: <i><b>@artistEntry.Key:</b></i></h3>
+    <ul class="list-unstyled">
       @foreach (var songWithCount in artistEntry.Value)
       {
         foreach (var song in songWithCount)
         {
-          <li>@song.Name, Sold: @songWithCount.Key</li>
+      <li class="h4"><span class="glyphicon glyphicon-music"></span> Title: <i>@song.Name - Sold: <b>@songWithCount.Key</b></i></li>
         }
       }
+    <li class="h4">Total: <i><b>@artistEntry.Value.Sum(s => s.Key)</b></i></li>
     </ul>
   }
 </div>

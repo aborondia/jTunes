@@ -1,8 +1,8 @@
 ﻿@model Song
 
-<h2>Top Selling Song of All Time</h2>
+<h2><u>Top Selling Song of All Time</u></h2>
 
-<h2>Title: @Model.Name</h2>
-<h3>Artist: @Model.Artist.Name</h3>
-<h3>Price: $@Model.Price</h3>
-<h2>Total Sales: @ViewBag.SaleCount</h2>
+<h3><span class="glyphicon glyphicon-music"></span> Title: <i><b>@Model.Name</b></i></h3>
+<h3><span class="glyphicon glyphicon-user"></span> Artist: <i><b>@Model.Artist.Name</b></i></h3>
+<h3><span class="glyphicon glyphicon-piggy-bank"></span> Price: <i><b>@Model.Price.ToString("c2")</b></i></h3>
+<h3>Total Sales: <i><b>@ViewBag.SaleCount</b></i></h3>
