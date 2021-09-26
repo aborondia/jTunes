@@ -15,7 +15,6 @@ namespace jTunes.Controllers
   {
     private jTunesDBEntities db = new jTunesDBEntities();
 
-    // GET: UserSongs
     public ActionResult Index(string Message = "", string MessageStyle = "")
     {
       ViewBag.Message = Message;
@@ -52,7 +51,6 @@ namespace jTunes.Controllers
       return View();
     }
 
-    // GET: UserSongs/Details/5
     public ActionResult Details(int? id)
     {
       if (id == null)
@@ -67,7 +65,6 @@ namespace jTunes.Controllers
       return View(userSong);
     }
 
-    // GET: UserSongs/Create
     public ActionResult Create()
     {
       ViewBag.SongId = new SelectList(db.Songs, "Id", "Name");
@@ -75,9 +72,6 @@ namespace jTunes.Controllers
       return View();
     }
 
-    // POST: UserSongs/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Create([Bind(Include = "Id,UserId,SongId,Rating,PurchaseDate")] UserSong userSong)
@@ -106,7 +100,6 @@ namespace jTunes.Controllers
       return View(userSong);
     }
 
-    // GET: UserSongs/Edit/5
     public ActionResult Edit(int? id)
     {
       if (id == null)
@@ -123,9 +116,6 @@ namespace jTunes.Controllers
       return View(userSong);
     }
 
-    // POST: UserSongs/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Edit([Bind(Include = "Id,UserId,SongId,Rating,PurchaseDate")] UserSong userSong)
@@ -142,7 +132,6 @@ namespace jTunes.Controllers
       return View(userSong);
     }
 
-    // GET: UserSongs/Delete/5
     public ActionResult Delete(int? id)
     {
       if (id == null)
@@ -157,7 +146,6 @@ namespace jTunes.Controllers
       return View(userSong);
     }
 
-    // POST: UserSongs/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public ActionResult DeleteConfirmed(int id)

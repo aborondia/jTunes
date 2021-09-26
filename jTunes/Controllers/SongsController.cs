@@ -15,7 +15,6 @@ namespace jTunes.Controllers
   {
     private jTunesDBEntities db = new jTunesDBEntities();
 
-    // GET: Songs
     public ActionResult Index(string Message = "", string MessageStyle = "")
     {
       ViewBag.Message = Message;
@@ -45,7 +44,6 @@ namespace jTunes.Controllers
 
     public ActionResult TopSongBySales()
     {
-
       ViewBag.SaleCount = jTunesHelper.GetTopSellingSongSales();
 
       return View(jTunesHelper.GetTopSellingSong());
@@ -96,23 +94,13 @@ namespace jTunes.Controllers
       {
         jTunesHelper.PurchaseSong(User, (int)Song);
 
-        if (jTunesHelper.PurchaseSuccessful(User, Song))
+        if (jTunesHelper.PurchaseWasSuccessful(User, Song))
         {
-          return RedirectToAction("PurchaseSong", new
-          {
-            User = User,
-            Message = $"{user.Name} successfully purchased {song.Name} by {song.Artist.Name}.",
-            MessageStyle = "text-success"
-          });
+          return RedirectToAction("PurchaseSong", jTunesHelper.SuccessfulPurchaseRedirect(User, song.Name, song.Artist.Name));
         }
         else
         {
-          return RedirectToAction("PurchaseSong", new
-          {
-            User = User,
-            Message = $"{user.Name} does not have enough money to purchase {song.Name} by {song.Artist.Name}.",
-            MessageStyle = "text-danger"
-          });
+          return RedirectToAction("PurchaseSong", jTunesHelper.UnsuccessfulPurchaseRedirect(User, song.Name, song.Artist.Name));
         }
       }
 
@@ -135,21 +123,11 @@ namespace jTunes.Controllers
 
         if (jTunesHelper.RefundSuccessful(purchase.Id))
         {
-          return RedirectToAction("RefundSong", new
-          {
-            User = User,
-            Message = $"Successfully refunded {user.Name} for the purchase of {song.Name} by {song.Artist.Name}.",
-            MessageStyle = "text-success"
-          });
+          return RedirectToAction("RefundSong", jTunesHelper.SuccessfulRefundRedirect(User, song.Name, song.Artist.Name));
         }
         else
         {
-          return RedirectToAction("RefundSong", new
-          {
-            User = User,
-            Message = $"Could not issue refund. It has been more than 15 days since {user.Name} purchased {song.Name} by {song.Artist.Name}.",
-            MessageStyle = "text-danger"
-          });
+          return RedirectToAction("RefundSong", jTunesHelper.UnsuccessfulRefundRedirect(User, song.Name, song.Artist.Name));
         }
       }
 

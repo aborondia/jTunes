@@ -9,14 +9,16 @@
   {
     <h2>Current User: @ViewBag.UserPurchasing.Name</h2>
     <h2>Available in Wallet: @ViewBag.Wallet</h2>
+    <br />
     foreach (var song in Model)
     {
       <ul class="list-unstyled">
-        <li>Title: @song.Name</li>
-        <li>Artist: @song.Artist.Name</li>
-        <li>Price: @song.Price.ToString("c2")</li>
-        <li>@Html.ActionLink("Buy this song", "PurchaseSong", new { User = ViewBag.UserPurchasing.Id, Song = song.Id })</li>
+        <li class="h4"><span class="glyphicon glyphicon-music"></span> Title: <b><i>@song.Name</i></b></li>
+        <li class="h4"><span class="glyphicon glyphicon-user"></span>Artist: <b><i>@song.Artist.Name</i></b></li>
+        <li class="h4"><span class="glyphicon glyphicon-piggy-bank"></span>Price: <b><i>@song.Price.ToString("c2")</i></b></li>
+        <li class="h4">@Html.ActionLink($"Buy {song.Name}", "PurchaseSong", new { User = ViewBag.UserPurchasing.Id, Song = song.Id })</li>
       </ul>
+      <br />
     }
     if(Model.Count() <= 0)
         {

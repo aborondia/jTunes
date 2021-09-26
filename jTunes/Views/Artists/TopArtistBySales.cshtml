@@ -10,7 +10,7 @@
   <ul class="list-unstyled">
     @foreach (var songWithSales in Model)
     {
-      <li class="h4"><span class="glyphicon glyphicon-music"> </span> Title: @songWithSales.Key - Total Sales: <b>@songWithSales.Value</b></li>
+    <li class="h4"><span class="glyphicon glyphicon-music"> </span> Title: <b><i>@songWithSales.Key</i></b> - Total Sales: <b>@songWithSales.Value</b></li>
     }
   </ul>
 </div>

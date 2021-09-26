@@ -15,14 +15,14 @@ namespace jTunes.Controllers
 
     public ActionResult About()
     {
-      ViewBag.Message = "Your application description page.";
+      ViewBag.Message = "jTunes is the up and coming definitive music streaming site!";
 
       return View();
     }
 
     public ActionResult Contact()
     {
-      ViewBag.Message = "Your contact page.";
+      ViewBag.Message = "Send any inquiries to 123 Fake St., Nowhere, NO, Box10001010";
 
       return View();
     }

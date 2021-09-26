@@ -8,16 +8,18 @@
   @if (Model != null)
   {
     <h2>Current User: @ViewBag.UserRequestingRefund.Name</h2>
+    <br />
     foreach (var userSong in Model)
     {
       <ul class="list-unstyled">
-        <li>Title: @userSong.Song.Name</li>
-        <li>Artist: @userSong.Song.Artist.Name</li>
-        <li>Price: @userSong.Song.Price.ToString("c2")</li>
-        <li>Purchase Date: @userSong.PurchaseDate.ToShortDateString()</li>
-        <li>Purchase Time: @userSong.PurchaseDate.ToShortTimeString()</li>
-        <li>@Html.ActionLink("Refund song", "RefundSong", new { User = ViewBag.UserRequestingRefund.Id, Song = userSong.SongId })</li>
+        <li class="h4"><span class="glyphicon glyphicon-music"></span> Title: <b><i>@userSong.Song.Name</i></b></li>
+        <li class="h4"><span class="glyphicon glyphicon-user"></span> Artist: <b><i>@userSong.Song.Artist.Name</i></b></li>
+        <li class="h4"><span class="glyphicon glyphicon-piggy-bank"></span> Price: <b><i>@userSong.Song.Price.ToString("c2")</i></b></li>
+        <li class="h4"><span class="glyphicon glyphicon-time"></span> Purchase Date: <b><i>@userSong.PurchaseDate.ToShortDateString()</i></b></li>
+        <li class="h4"><span class="glyphicon glyphicon-time"></span> Purchase Time: <b><i>@userSong.PurchaseDate.ToShortTimeString()</i></b></li>
+        <li class="h4">@Html.ActionLink($"Refund {userSong.Song.Name}", "RefundSong", new { User = ViewBag.UserRequestingRefund.Id, Song = userSong.SongId })</li>
       </ul>
+      <br />
     }
     if (Model.Count() <= 0)
     {

@@ -10,7 +10,6 @@ namespace jTunes.Models
   public static class jTunesHelper
   {
     private static jTunesDBEntities db = new jTunesDBEntities();
-
     public static SelectList UserSelect = new SelectList(db.Users, "Id", "Name");
     public static SelectList SongSelect = new SelectList(db.Songs, "Id", "Name");
     public static SelectList YearSelect
@@ -24,7 +23,7 @@ namespace jTunes.Models
           yearList.Add(new SelectListItem() { Value = i.ToString() });
         }
 
-        return new SelectList(yearList, "Value", "Value");
+        return new SelectList(yearList, "Value", "Value", DateTime.Now.Year);
       }
     }
 
@@ -39,7 +38,7 @@ namespace jTunes.Models
           monthList.Add(new SelectListItem() { Text = MonthNumberToName(i), Value = i.ToString() });
         }
 
-        return new SelectList(monthList, "Value", "Text");
+        return new SelectList(monthList, "Value", "Text", DateTime.Now.Month);
       }
     }
 
@@ -63,7 +62,6 @@ namespace jTunes.Models
       }
     }
 
-
     private static IGrouping<int, UserSong> GetTopSongWithSales()
     {
       var groupedSongSales = db.UserSongs.GroupBy(ss => ss.SongId)
@@ -76,6 +74,7 @@ namespace jTunes.Models
     public static Song GetTopSellingSong()
     {
       int songId = GetTopSongWithSales().Select(ss => ss.SongId).FirstOrDefault();
+
       return db.Songs.Find(songId);
     }
 
@@ -87,15 +86,19 @@ namespace jTunes.Models
     private static IGrouping<int, UserSong> GetTopSellingArtistWithSales()
     {
       var artistsWithSales = db.UserSongs.GroupBy(aws => aws.Song.ArtistId);
-      var topArtistWithSales = artistsWithSales.OrderByDescending(aws => aws.Count()).FirstOrDefault();
-
+      var topArtistWithSales = artistsWithSales
+        .OrderByDescending(aws => aws.Count())
+        .FirstOrDefault();
 
       return topArtistWithSales;
     }
 
     public static Artist GetTopSellingArtist()
     {
-      var artistId = GetTopSellingArtistWithSales().Select(taws => taws.Song.ArtistId).FirstOrDefault();
+      var artistId = GetTopSellingArtistWithSales()
+        .Select(taws => taws.Song.ArtistId)
+        .FirstOrDefault();
+
       return db.Artists.Find(artistId);
     }
 
@@ -157,12 +160,13 @@ namespace jTunes.Models
         purchase.UserId = userId;
         purchase.SongId = songId;
         purchase.PurchaseDate = DateTime.Now;
+
         db.UserSongs.Add(purchase);
         db.SaveChanges();
       }
     }
 
-    public static bool PurchaseSuccessful(int userId, int? songId)
+    public static bool PurchaseWasSuccessful(int userId, int? songId)
     {
       var purchase = db.UserSongs.FirstOrDefault(us => us.UserId == userId && us.SongId == songId);
 
@@ -170,13 +174,39 @@ namespace jTunes.Models
 
     }
 
+    public static object SuccessfulPurchaseRedirect(int userId, string songName, string artistName)
+    {
+      var user = db.Users.Find(userId);
+
+      return new
+      {
+        User = user.Id,
+        Message = $"{user.Name} successfully purchased {songName} by {artistName}.",
+        MessageStyle = "text-success"
+      };
+    }
+
+    public static object UnsuccessfulPurchaseRedirect(int userId, string songName, string artistName)
+    {
+      var user = db.Users.Find(userId);
+
+      return new
+      {
+        User = user.Id,
+        Message = $"{user.Name} does not have enough money to purchase {songName} by {artistName}.",
+        MessageStyle = "text-danger"
+      };
+    }
+
     public static void RefundSong(int userSongId)
     {
       var purchase = db.UserSongs.Find(userSongId);
       var user = db.Users.Find(purchase.UserId);
+
       if (purchase.PurchaseDate.AddDays(15) >= DateTime.Now)
       {
         user.Money += purchase.Song.Price;
+
         db.UserSongs.Remove(purchase);
         db.SaveChanges();
       }
@@ -187,24 +217,49 @@ namespace jTunes.Models
       var purchase = db.UserSongs.Find(purchaseId);
 
       return purchase == null ? true : false;
+    }
 
+    public static object SuccessfulRefundRedirect(int userId, string songName, string artistName)
+    {
+      var user = db.Users.Find(userId);
+
+      return new
+      {
+        User = user.Id,
+        Message = $"Successfully refunded {user.Name} for the purchase of {songName} by {artistName}.",
+        MessageStyle = "text-success"
+      };
+    }
+
+    public static object UnsuccessfulRefundRedirect(int userId, string songName, string artistName)
+    {
+      var user = db.Users.Find(userId);
+
+      return new
+      {
+        User = user.Id,
+        Message = $"Could not issue refund. It has been more than 15 days since {user.Name} purchased {songName} by {artistName}.",
+        MessageStyle = "text-danger"
+      };
     }
 
     public static Dictionary<string, IEnumerable<IGrouping<int, Song>>> GetArtistsWithSongs()
     {
-      var artistsWithSongs = db.Songs.GroupBy(s => s.ArtistId).ToList();
+      var artistsWithSongs = db.Songs
+        .GroupBy(s => s.ArtistId)
+        .ToList();
       var artistsWithSongsDictionary = new Dictionary<string, IEnumerable<IGrouping<int, Song>>>();
 
       foreach (var artistEntry in artistsWithSongs)
       {
         var artistName = db.Artists.Find(artistEntry.Key).Name;
-        artistsWithSongsDictionary[artistName] = artistEntry.GroupBy(s => GetTotalSongSales(s.Id));
+        artistsWithSongsDictionary[artistName] = artistEntry.GroupBy(s => GetIndividualSongSales(s.Id));
       }
 
       return artistsWithSongsDictionary;
     }
 
-    public static int GetTotalSongSales(int songId)
+    public static int GetIndividualSongSales(int songId)
     {
       return db.UserSongs.Where(us => us.SongId == songId).Count();
     }
