@@ -1,0 +1,38 @@
+﻿@model IEnumerable<UserSong>
+
+<h2>Total Purchases of Song</h2>
+
+@using (Html.BeginForm())
+{
+  <div>
+    <span class="mb-3 h4">Select a song:</span>
+    @Html.DropDownList("Song")
+    <input class="ml-3 h4" type="submit" />
+  </div>
+}
+
+@if (Model != null)
+{
+  <div>
+    <ul class="list-unstyled">
+      <li class="h3"><span class="glyphicon glyphicon-music"></span> Sales for: @ViewBag.SongName</li>
+      <li class="h3">Total: @ViewBag.TotalPurchases</li>
+        <li class="h3">Purchase Details:</li>
+      @foreach (var userSong in Model)
+      {
+        <li>
+          <ul class="list-unstyled">
+            <li><span class="glyphicon glyphicon-user"> </span> User: @userSong.User.Name</li>
+            <li><span class="glyphicon glyphicon-time"> </span> Purchased: @userSong.PurchaseDate.ToShortDateString()</li>
+          </ul>
+          <br />
+        </li>
+      }
+    </ul>
+    @if (Model.Count() <= 0)
+    {
+      <h4>@ViewBag.SongName has not been purchased.</h4>
+    }
+  </div>
+}
+

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<UserSong>
+
+<h2>Refund Song</h2>
+
+@Html.Partial("_UserMessage")
+
+<div>
+  @if (Model != null)
+  {
+    <h2>Current User: @ViewBag.UserRequestingRefund.Name</h2>
+    foreach (var userSong in Model)
+    {
+      <ul class="list-unstyled">
+        <li>Title: @userSong.Song.Name</li>
+        <li>Artist: @userSong.Song.Artist.Name</li>
+        <li>Price: @userSong.Song.Price.ToString("c2")</li>
+        <li>@Html.ActionLink("Refund song", "RefundSong", new { User = ViewBag.UserRequestingRefund.Id, Song = userSong.SongId })</li>
+      </ul>
+    }
+  }
+</div>

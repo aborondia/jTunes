@@ -1,0 +1,18 @@
+﻿
+<h2>Check Monthly Sales</h2>
+
+@using (Html.BeginForm())
+{
+  <div>
+    <span class="mb-3 h4">Select a year:</span>
+    @Html.DropDownList("Year")
+    <span class="mb-3 h4">Select a month:</span>
+    @Html.DropDownList("Month")
+    <input class="ml-3 h4" type="submit" />
+  </div>
+}
+
+@if(ViewBag.TotalSales != null)
+      {
+        <h1>Total Sales: @ViewBag.TotalSales</h1>
+      }

@@ -1,0 +1,18 @@
+﻿@model Dictionary<string, IEnumerable<IGrouping<int, Song>>>
+
+<h2>Artists Song Sales</h2>
+<div>
+  @foreach (var artistEntry in Model)
+  {
+    <h3>Songs by @artistEntry.Key:</h3>
+    <ul>
+      @foreach (var songWithCount in artistEntry.Value)
+      {
+        foreach (var song in songWithCount)
+        {
+          <li>@song.Name, Sold: @songWithCount.Key</li>
+        }
+      }
+    </ul>
+  }
+</div>

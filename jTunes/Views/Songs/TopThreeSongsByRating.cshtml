@@ -1,0 +1,12 @@
+﻿@model Dictionary<Song, double>
+
+<h2>Top Three Rated Songs</h2>
+
+<div>
+  <ol>
+    @foreach (var songWithRating in Model)
+    {
+      <li>@songWithRating.Key.Name total average rating: @songWithRating.Value</li>
+    }
+  </ol>
+</div>

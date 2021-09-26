@@ -1,0 +1,18 @@
+﻿@model Dictionary<string, int>
+
+<h2>Top Selling Artist</h2>
+
+<h2>@ViewBag.ArtistName</h2>
+
+<h2>Total Sales: @ViewBag.TotalSales</h2>
+
+<h2>Individual Song Sales:</h2>
+<div>
+  <ul>
+
+    @foreach (var songWithSales in Model)
+    {
+      <li>@songWithSales.Key total sales: @songWithSales.Value</li>
+    }
+  </ul>
+</div>

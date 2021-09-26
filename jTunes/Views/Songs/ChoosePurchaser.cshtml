@@ -1,0 +1,13 @@
+﻿
+<h2>Choose the User Who Wants to purchase a song</h2>
+
+
+@using (Html.BeginForm())
+{
+  <div>
+    <span class="mb-3 h4">Select a user:</span>
+    @Html.DropDownList("User")
+    @Html.Hidden("Action", (object)ViewBag.Action)
+    <input class="ml-3 h4" type="submit" />
+  </div>
+}

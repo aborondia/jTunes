@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jTunes", "jTunes\jTunes.csproj", "{FCC0C666-AC37-443B-9A4B-0AA9028D05E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCC0C666-AC37-443B-9A4B-0AA9028D05E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC0C666-AC37-443B-9A4B-0AA9028D05E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC0C666-AC37-443B-9A4B-0AA9028D05E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC0C666-AC37-443B-9A4B-0AA9028D05E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0AA0A310-7B2D-4D91-846E-26D0A917C6AA}
+	EndGlobalSection
+EndGlobal

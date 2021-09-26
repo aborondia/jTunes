@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Song>
+
+<h2>Purchase Song</h2>
+
+@Html.Partial("_UserMessage")
+
+<div>
+  @if (Model != null)
+  {
+    <h2>Current User: @ViewBag.UserPurchasing.Name</h2>
+    <h2>Available in Wallet: @ViewBag.Wallet</h2>
+    foreach (var song in Model)
+    {
+      <ul class="list-unstyled">
+        <li>Title: @song.Name</li>
+        <li>Artist: @song.Artist.Name</li>
+        <li>Price: @song.Price.ToString("c2")</li>
+        <li>@Html.ActionLink("Buy this song", "PurchaseSong", new { User = ViewBag.UserPurchasing.Id, Song = song.Id })</li>
+      </ul>
+    }
+  }
+</div>
